@@ -1,71 +1,44 @@
-/**
- * Payment Platform Build Configuration
- * 
- * This Gradle build file configures the Payment Platform application with:
- * - Java project setup and compilation
- * - Spring Boot framework integration (v4.1.1)
- * - Dependency management for Spring Boot projects
- * - Java 21 language level support
- * - Web MVC support with testing capabilities
- * 
- * Key Components:
- * - Spring Boot Starter WebMvc: Web application framework
- * - Lombok: Annotation processor for reducing boilerplate code
- * - Spring Boot DevTools: Development-time features and fast application restarts
- * - JUnit Platform: Testing framework
- */
- plugins {
-	id 'java'
-	id 'org.springframework.boot' version '4.1.0'
-	id 'io.spring.dependency-management' version '1.1.7'
+plugins {
+	alias(libs.plugins.spring.boot) apply false
+	alias(libs.plugins.spring.dependency.management) apply false
 }
 
 group = 'com.xcelerate'
 version = '0.0.1-SNAPSHOT'
 
-// Java toolchain configuration
-java {
-	toolchain {
-		// Target Java 21 language level for modern Java features and compatibility
-		languageVersion = JavaLanguageVersion.of(21)
+def projectDescriptions = [
+	'payment-validation-service': 'Validates payment requests before processing.',
+	'payment-processing-service': 'Coordinates payment workflows and provider selection.',
+	'stripe-provider-service': 'Integrates the platform with Stripe.',
+	'paypal-provider-service': 'Integrates the platform with PayPal.'
+]
+
+subprojects {
+	description = projectDescriptions[name]
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	java {
+		toolchain {
+			languageVersion = JavaLanguageVersion.of(21)
+		}
 	}
-}
 
-// Repository configuration
-// Maven Central repository for dependency resolution
-repositories {
-	mavenCentral()
-}
+	dependencies {
+		implementation libs.spring.boot.starter.webmvc
+		implementation libs.spring.boot.starter.validation
+		implementation libs.spring.boot.starter.actuator
+		compileOnly libs.lombok
+		developmentOnly libs.spring.boot.devtools
+		annotationProcessor libs.lombok
+		testImplementation libs.spring.boot.starter.webmvc.test
+		testCompileOnly libs.lombok
+		testRuntimeOnly libs.junit.platform.launcher
+		testAnnotationProcessor libs.lombok
+	}
 
-// Project dependencies
-dependencies {
-	// Spring Boot Web MVC Starter: Core web application framework with embedded Tomcat
-	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-	
-	// Lombok: Reduces boilerplate code through code generation annotations
-	compileOnly 'org.projectlombok:lombok'
-	
-	// Spring Boot DevTools: Enables development-time features (auto-restart, live reload, configurations)
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	
-	// Lombok Annotation Processor: Processes Lombok annotations during compilation
-	annotationProcessor 'org.projectlombok:lombok'
-	
-	// Spring Boot Web MVC Test: Testing support for Spring web applications with MockMvc
-	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-	
-	// Lombok for test code compilation
-	testCompileOnly 'org.projectlombok:lombok'
-	
-	// JUnit Platform Launcher: Required runtime dependency for JUnit 5 test execution and discovery
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	
-	// Lombok Annotation Processor for test code
-	testAnnotationProcessor 'org.projectlombok:lombok'
-}
-
-// Configure JUnit 5 (Jupiter) test platform
-tasks.named('test') {
-	// Enable JUnit Platform for test execution and discovery
-	useJUnitPlatform()
+	tasks.withType(Test).configureEach {
+		useJUnitPlatform()
+	}
 }

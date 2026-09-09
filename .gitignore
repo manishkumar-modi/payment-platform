@@ -1,16 +1,11 @@
-# Compiled class file
+# ============================================
+# Java & Spring Boot Application Ignore Rules
+# ============================================
+
+# ============================================
+# Compiled class files and built artifacts
+# ============================================
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
 *.nar
@@ -19,9 +14,104 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# ============================================
+# Gradle build directories and artifacts
+# ============================================
+.gradle/
+build/
+out/
+bin/
+
+# ============================================
+# IDE Configuration Files
+# ============================================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+.history/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.factorypath
+.sts4-cache/
+
+# NetBeans
+.nb-gradle/
+.nbproject/
+nb-configuration.xml
+
+# Mac OS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# ============================================
+# Application & Development
+# ============================================
+# Application logs
+*.log
+logs/
+
+# Spring Boot specific
+HELP.md
+application.properties.local
+application-local.properties
+application-dev.properties
+application-prod.properties
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# ============================================
+# JVM & Runtime
+# ============================================
+# Java Virtual Machine crash logs
 hs_err_pid*
 replay_pid*
 
-# macOS metadata
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# ============================================
+# Node.js (if using frontend)
+# ============================================
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# ============================================
+# OS-specific files
+# ============================================
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# ============================================
+# Gradle Wrapper (optional - uncomment to track wrapper)
+# ============================================
+# gradle-app.setting
+# !gradle-wrapper.jar
+# !gradle-wrapper.properties

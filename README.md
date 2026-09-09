@@ -168,7 +168,7 @@ This repository uses a **monorepo** approach. All payment microservices are main
 - Spring Boot
 - Spring Web
 - Spring Validation
-- Spring Data JPA
+- Spring Boot Actuator
 - Gradle
 - REST APIs
 
@@ -191,6 +191,22 @@ This repository uses a **monorepo** approach. All payment microservices are main
 - Health Checks
 - Application Metrics
 - Logging
+
+### Gradle Dependencies
+
+Dependencies are defined centrally in `gradle/libs.versions.toml` and shared by all services.
+
+| Dependency | Purpose |
+|---|---|
+| Spring Boot Web MVC | Provides REST controllers and embedded HTTP server support. |
+| Spring Boot Validation | Validates request fields and API input constraints. |
+| Spring Boot Actuator | Provides operational health and monitoring endpoints. |
+| Spring Boot Test | Provides Spring and web-layer testing utilities. |
+| Spring Boot DevTools | Provides development-time restart and live reload support. |
+| Lombok | Generates common Java boilerplate at compile time. |
+| JUnit Platform Launcher | Discovers and runs tests on the JUnit Platform. |
+
+The shared Gradle plugins provide Spring Boot packaging and centralized dependency management.
 
 ## Local Development
 
@@ -262,6 +278,8 @@ application-prod.yml
 ```
 
 Sensitive values must not be committed to Git.
+
+Each service exposes a health endpoint at `/actuator/health`. Only the health endpoint is exposed by default.
 
 Examples include:
 

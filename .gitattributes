@@ -1,0 +1,7 @@
+# Keep shell scripts executable and consistently formatted.
+/gradlew text eol=lf
+*.bat text eol=crlf
+
+# Do not normalize binary artifacts as text.
+*.jar binary
+*.class binary

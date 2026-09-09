@@ -1,6 +1,19 @@
-/**
- * Payment Platform Gradle Settings Configuration
- * 
- * This file defines the root project name and Gradle build configuration properties
- * for the Payment Platform multi-module or single-module Gradle build.
- */\n\nrootProject.name = 'payment-platform'
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+		mavenCentral()
+	}
+}
+
+dependencyResolutionManagement {
+	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+	repositories {
+		mavenCentral()
+	}
+}
+
+rootProject.name = 'payment-platform'
+include 'payment-validation-service'
+include 'payment-processing-service'
+include 'stripe-provider-service'
+include 'paypal-provider-service'

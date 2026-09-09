@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: payment-processing-service
+
+server:
+  port: 8082
+
+payment:
+  stripe-provider-service-url: http://localhost:8083
+  paypal-provider-service-url: http://localhost:8084
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
