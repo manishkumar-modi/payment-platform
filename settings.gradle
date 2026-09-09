@@ -1,0 +1,6 @@
+/**
+ * Payment Platform Gradle Settings Configuration
+ * 
+ * This file defines the root project name and Gradle build configuration properties
+ * for the Payment Platform multi-module or single-module Gradle build.
+ */\n\nrootProject.name = 'payment-platform'
